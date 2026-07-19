@@ -1,0 +1,199 @@
+question,label
+Will my facility pass an FDA inspection if we currently have two open CAPAs?,advice_seeking
+What are the chances my site gets a warning letter after this deviation?,advice_seeking
+"Should I recall this batch, or is documenting the deviation enough?",advice_seeking
+Do you think our validation protocol is strong enough for FDA approval?,advice_seeking
+"Am I legally required to report this to FDA, or can it wait until next quarter?",advice_seeking
+Could we get sued if a patient has a reaction from this batch?,advice_seeking
+Is it safe to release this batch given the out-of-specification result?,advice_seeking
+Will FDA approve our biologics license application given our manufacturing history?,advice_seeking
+Should we proceed with commercial distribution before the PPQ report is finalized?,advice_seeking
+What's the likelihood our next inspection results in a Form 483?,advice_seeking
+Do you think this excursion is serious enough to trigger a recall?,advice_seeking
+"Should I tell my manager about this deviation, or handle it quietly?",advice_seeking
+Is our facility ready for a pre-approval inspection next month?,advice_seeking
+Will the FDA consider our root cause investigation sufficient?,advice_seeking
+"Should we self-report this labeling error, or wait to see if anyone notices?",advice_seeking
+What are our chances of getting the warning letter lifted this year?,advice_seeking
+Is it worth the risk to skip the extra validation run to save time?,advice_seeking
+Should I approve this batch even though the retest is still pending?,advice_seeking
+Do you think the inspector will flag our cleanroom gowning procedure?,advice_seeking
+"Will this change require a new regulatory submission, or can we just document it internally?",advice_seeking
+"Should we escalate this complaint to CBER, or is it minor enough to log internally?",advice_seeking
+Is our current supplier qualification good enough to avoid an audit finding?,advice_seeking
+What's the probability FDA classifies this as a Class I recall?,advice_seeking
+Should I sign off on this batch release given the borderline stability data?,advice_seeking
+Do you think we'll pass our upcoming ISO 13485 surveillance audit?,advice_seeking
+Is it a good idea to combine two deviations into one CAPA to save time?,advice_seeking
+Will regulators consider our contamination control strategy adequate?,advice_seeking
+Should we delay the product launch until every open CAPA is closed?,advice_seeking
+What do you think our odds are of avoiding a consent decree?,advice_seeking
+Is our current environmental monitoring frequency going to satisfy an auditor?,advice_seeking
+"Should I disclose this near-miss to the quality unit, or is it not reportable?",advice_seeking
+Do you think this out-of-trend result will trigger a full investigation?,advice_seeking
+Will FDA accept our justification for skipping the extra APS run?,advice_seeking
+Should we proceed with the change control before or after notifying our distributor?,advice_seeking
+Is it risky to ship this lot while the retain sample testing is still in progress?,advice_seeking
+What are the odds this warning letter response gets accepted on the first try?,advice_seeking
+Should I be worried about this water system excursion affecting product quality?,advice_seeking
+Do you think our current staffing levels will hold up under inspection scrutiny?,advice_seeking
+Is this deviation minor enough that we don't need to notify the client?,advice_seeking
+"Will the agency consider three consecutive successful APS runs sufficient, or will they want more?",advice_seeking
+Should we hold the shipment until legal reviews the labeling discrepancy?,advice_seeking
+What's your assessment of whether we'll get cited for this documentation gap?,advice_seeking
+Do you think it's safe to use this supplier's certificate of analysis without our own retesting?,advice_seeking
+Should we wait for the CAPA to close before submitting the annual product review?,advice_seeking
+Is our current level of process understanding sufficient to claim real-time release?,advice_seeking
+"Will this proposed post-approval change require prior FDA approval, in your opinion?",advice_seeking
+"Should I recommend a full recall, or is a market withdrawal enough here?",advice_seeking
+Do you think we should disclose this to our notified body proactively?,advice_seeking
+Is there a real risk the FDA will consider our facility adulterated over this finding?,advice_seeking
+Should we accept the risk of shipping before the stability chamber excursion is fully investigated?,advice_seeking
+What is the purpose of the cGMP regulations set out in 21 CFR Parts 210 and 211?,factual
+Which parts of 21 CFR govern cGMP for biological products intended for human use?,factual
+How does 21 CFR 210.3 define a 'batch' of drug product?,factual
+What qualifications must a consultant have to advise on pharmaceutical manufacturing under 21 CFR 211.34?,factual
+What standard must potable water meet in a drug manufacturing plumbing system per 21 CFR 211.48?,factual
+What does 21 CFR 211.50 require for sewage and refuse disposal?,factual
+Who must approve exemptions to the shipment temperature requirements for biological products under 21 CFR 600.15?,factual
+Who is authorized to inspect a biologics manufacturing establishment under 21 CFR 600.20?,factual
+"When can an establishment be inspected for a pending biologics license application, per 21 CFR 600.21?",factual
+What determination must be made before a biologics license is issued under 21 CFR 601.4?,factual
+What procedure governs hearings related to revocation of a biological drug's exemption under 21 CFR 601.7?,factual
+What must the FDA publish following revocation of a biologics license under 21 CFR 601.8?,factual
+What labeling controls are required for blood and blood components under 21 CFR 606.120?,factual
+What must laboratory control procedures for blood components include per 21 CFR 606.140?,factual
+What must distribution records for blood components contain under 21 CFR 606.165?,factual
+"When must lot-release testing be completed relative to the manufacturing process, per 21 CFR 610.1?",factual
+What types of tests can be used to establish the potency of a licensed biological product under 21 CFR 610.10?,factual
+What is required for identity testing of a final container under 21 CFR 610.14?,factual
+"What does FDA's aseptic processing guidance say equipment design must achieve to control endotoxin contamination, citing 21 CFR 211.63/211.65?",factual
+"What does FDA guidance require regarding time limits for phases of aseptic processing, per 21 CFR 211.111?",factual
+What environmental classification approach does FDA's aseptic processing guidance describe for critical manufacturing areas (e.g. Class 100/ISO 5)?,factual
+What does FDA's aseptic processing guidance say about sterility testing of aseptically processed products?,factual
+Under what circumstances does FDA's process validation guidance permit concurrent release of PPQ batches before the protocol is fully executed?,factual
+Why does FDA's process validation guidance emphasize documentation at each stage of the process validation lifecycle?,factual
+What does EU GMP Annex 1 say about applying Quality Risk Management principles to facility and equipment design?,factual
+"What must an Aseptic Process Simulation (APS) replicate, according to EU GMP Annex 1 section 9.33?",factual
+What factors should be considered when developing an APS plan under EU GMP Annex 1 section 9.36?,factual
+"What must be done with filled APS units before incubation, per EU GMP Annex 1 section 9.41?",factual
+What does the environmental and process monitoring programme described in EU GMP Annex 1 section 9.1 monitor?,factual
+What four elements typically comprise the environmental and process monitoring programme under EU GMP Annex 1 section 9.2?,factual
+What must be set for viable and total particle monitoring results under EU GMP Annex 1 section 9.9?,factual
+What precaution does EU GMP Annex 1 section 8.26 require for vial-cap crimping equipment that generates particles?,factual
+"According to ICH Q7 section 1.2, how should a material be manufactured if it is classified as an API in its region?",factual
+What does ICH Q7 section 2.11 require of manufacturers regarding a system for managing quality?,factual
+What should the quality management system encompass according to ICH Q7 section 2.12?,factual
+"What is the scope of ICH Q8 according to section 1.2, in relation to Module 3 of the Common Technical Document?",factual
+What does ICH Q8 section 2.2.2 say about using an overage of a drug substance?,factual
+"What must be addressed regarding compatibility of a drug product with reconstitution diluents, per ICH Q8 section 2.6?",factual
+"What aspects of the pharmaceutical lifecycle does ICH Q9's quality risk management framework apply to, per section 2 (Scope)?",factual
+What are the two primary principles of quality risk management according to ICH Q9 section 3?,factual
+What steps might be used to initiate a quality risk management process under ICH Q9 section 4.2?,factual
+How should regulatory approaches be commensurate with pharmaceutical quality system effectiveness under ICH Q10 section 1.4?,factual
+"What are the three main objectives of implementing the ICH Q10 model, per section 1.5?",factual
+What does 'Achieve Product Realisation' mean as an ICH Q10 objective under section 1.5.1?,factual
+How does FDA's aseptic-processing approach to media fill/process simulation (Section IX) compare with EU GMP Annex 1's APS requirements (sections 9.33-9.41)?,factual
+How do FDA's process validation documentation expectations (Section VI) relate to ICH Q9's steps for initiating a quality risk management process (section 4.2)?,factual
+How does FDA's consultant-qualification requirement (21 CFR 211.34) compare to ICH Q7's expectations for a manufacturer's quality management system (sections 2.11-2.12)?,factual
+How does the environmental monitoring programme required by EU GMP Annex 1 (sections 9.1-9.2) compare to the environmental classification approach in FDA's aseptic processing guidance (Section IV)?,factual
+What does USP General Chapter <232> specify regarding limits for elemental impurities in drug products?,factual
+Why are the arsenic and mercury limits in USP <232> based on their inorganic oxidation states rather than total elemental content?,factual
+How does USP <232> classify elemental impurities for the purpose of setting permitted daily exposure (PDE) limits by route of administration?,factual
+"Under USP <232>, when can drug product components be used in any proportion without further elemental-impurity risk assessment?",factual
+What information do drug product manufacturers need from drug substance or excipient suppliers to demonstrate compliance with USP <232>?,factual
+When is further analytical testing for elemental impurities not needed under USP <232>?,factual
+What does USP General Chapter <233> describe regarding analytical procedures for elemental impurities?,factual
+What must be demonstrated before an elemental-impurity analytical procedure is considered acceptable under USP <233>?,factual
+How does USP <233> define 'aqua regia' in the context of elemental impurity analysis?,factual
+How does USP <232>'s classification of elemental impurities into toxicity-based classes relate to ICH Q9's risk-based approach to quality risk management?,factual
+"How does FDA's requirement that equipment surfaces be non-reactive (21 CFR 211.65, cited in the aseptic processing guidance) relate to USP <232>'s concern about elemental impurities introduced via processing equipment?",factual
+"Under 21 CFR 211.22, what authority must a drug manufacturer's quality control unit have over components, in-process materials, and drug products?",factual
+What environmental controls does 21 CFR 211.42 require for aseptic processing areas used in drug manufacturing?,factual
+What elements must written equipment cleaning and maintenance procedures address under 21 CFR 211.67?,factual
+"If a fiber-releasing filter must be used to manufacture an injectable drug product, what additional filter is required under 21 CFR 211.72?",factual
+What must written procedures for drug products purporting to be sterile include under 21 CFR 211.113?,factual
+Which categories of OTC drug products are excluded from the tamper-evident packaging requirements in 21 CFR 211.132?,factual
+What elements must a written drug product stability testing program include under 21 CFR 211.166?,factual
+"How long must a reserve sample of an active ingredient used in a radioactive drug product with an expiration dating period of more than 30 days be retained, per 21 CFR 211.170?",factual
+How does 21 CFR 600.3 define a 'biological product'?,factual
+What clothing and protective device requirements does 21 CFR 600.10 impose on personnel performing sterile operations in a biologics manufacturing facility?,factual
+For how long must a biologics manufacturer retain retention samples of each product lot under 21 CFR 600.13?,factual
+What is the deadline for a licensed biologics manufacturer to report a biological product deviation to FDA under 21 CFR 600.14?,factual
+What actions must a licensed manufacturer take when FDA suspends its biologics license under 21 CFR 601.6?,factual
+What are the requirements for submitting package insert labeling content in electronic format under 21 CFR 601.14?,factual
+What does 21 CFR 601.31 define as a 'diagnostic radiopharmaceutical'?,factual
+What factors does FDA consider when evaluating the safety of a diagnostic radiopharmaceutical under 21 CFR 601.35?,factual
+What postmarketing reporting obligations apply to biological products approved under the accelerated approval program described in 21 CFR 601.44?,factual
+How does 21 CFR 606.3 define a 'blood component'?,factual
+What time-temperature combinations does 21 CFR 606.60 specify as sufficient to sterilize equipment used in blood collection?,factual
+What must a blood collection establishment do if it identifies bacterially contaminated platelets under 21 CFR 606.145?,factual
+How quickly must a fatal transfusion-related complication be reported to CBER under 21 CFR 606.170?,factual
+What must be demonstrated to validate a sterility test method for biological products under 21 CFR 610.12?,factual
+What is the minimum test dose per kilogram of rabbit body weight required for the pyrogen test under 21 CFR 610.13?,factual
+Can two licensed biological products be combined into a single product without obtaining a separate license under 21 CFR 610.17?,factual
+What events can be used to determine the 'date of manufacture' for a biological product other than Whole Blood or blood components under 21 CFR 610.50?,factual
+"According to FDA's discussion of the technical framework for aseptic processing, what is the fundamental difference between how sterility is achieved in aseptic processing versus terminal sterilization?",factual
+"Does FDA's 2004 Aseptic Processing Guidance address terminal sterilization of drug products, and under what circumstance does FDA consider it acceptable to use aseptic processing instead of terminal sterilization?",factual
+"How frequently should aseptic gowning requalification normally be performed for automated aseptic operations where personnel involvement is minimized, and what circumstance should trigger additional or more frequent requalification?",factual
+What minimum percentage (log) reduction in endotoxin content must validation data demonstrate for a container/closure depyrogenation process to be considered adequate?,factual
+What incubation temperature and duration does FDA recommend for obtaining total aerobic bacterial counts versus total combined yeast and mold counts in an environmental monitoring program?,factual
+"What are the three stages of process validation described in FDA's 2011 Process Validation guidance, and what is the primary goal of each stage?",factual
+"What key elements should a written Process Performance Qualification (PPQ) protocol address during Stage 2 of process validation, according to FDA's guidance?",factual
+"How does FDA's Process Validation guidance define 'concurrent release,' and how does this concept differ from 'continued process verification'?",factual
+What is a Contamination Control Strategy (CCS) and what is it meant to establish across a sterile manufacturing facility?,factual
+"How many grades of cleanroom/zone does EU GMP Annex 1 define for the manufacture of sterile products, and what distinguishes Grade A?",factual
+What is the fundamental design purpose of isolators and RABS technologies according to EU GMP Annex 1?,factual
+What criteria define a 'higher risk' utility system under EU GMP Annex 1?,factual
+How does the EU GMP Annex 1 glossary define an airlock and what is its intended purpose?,factual
+What design requirements apply to airlocks used for personnel and material movement between cleanroom grades?,factual
+Are disinfectants and detergents used in grade A and grade B cleanrooms required to be sterile before use?,factual
+How should Water for Injections (WFI) be produced and stored to minimize the risk of microbial growth?,factual
+"Are personal items like jewellery, make-up, and mobile phones allowed in cleanrooms under EU GMP Annex 1?",factual
+What requirements apply to the laundering of reusable clean area clothing?,factual
+What air pressure differential should be maintained between cleanrooms of different grades in a sterile manufacturing facility?,factual
+What minimum background cleanroom grade is required behind open and closed isolators used in aseptic processing?,factual
+"What is the difference between direct and indirect product contact parts of equipment in aseptic processing, and must both be sterilised?",factual
+What should a manufacturer's Contamination Control Strategy define with respect to the risks of the aseptic process?,factual
+Is visual inspection an acceptable method for verifying container closure integrity of fusion-sealed containers like BFS or FFS units?,factual
+What factors should be taken into account when validating a sterilisation process?,factual
+What parameters should be included when validating a porous sterilisation cycle?,factual
+Under what conditions should sterile filtration of liquids be validated when grouping different product strengths or variations?,factual
+Can an Aseptic Process Simulation (APS) be relied upon as the primary means of validating the aseptic process?,factual
+"How many consecutive successful APS runs are required for initial validation of an aseptic process, and how often should APS be repeated afterward?",factual
+"What particle sizes are measured for cleanroom classification, and when should this measurement be performed?",factual
+What is the difference between the 'at rest' and 'in operation' states used for cleanroom classification?,factual
+What continuous monitoring parameters should be used for WFI systems to assess overall system performance?,factual
+What is the purpose of an environmental monitoring programme according to EU GMP Annex 1?,factual
+"How should alert levels be set for grade A, B, C, and D cleanrooms with regard to particle contamination trends?",factual
+"Does ICH Q7 require API manufacturers to maintain fully separate QA and QC departments, or can one unit handle both responsibilities?",factual
+"Under ICH Q7, what should happen if a worker involved in API manufacturing is found to have an infectious disease or open lesions on exposed skin?",factual
+"What does ICH Q7 require regarding the design of buildings and facilities used to manufacture APIs, especially with respect to microbiological contamination?",factual
+"If potable water isn't sufficient to assure API quality, what kind of water quality specifications does ICH Q7 say should be established?",factual
+"What does ICH Q7 require of equipment surfaces that come into contact with raw materials, intermediates, or APIs?",factual
+"Per ICH Q7, who must review and approve batch production and laboratory control records of critical process steps before an API batch is released?",factual
+"How does ICH Q7 define 'blending', and what in-process mixing activities does it explicitly exclude from that definition?",factual
+"According to ICH Q7, what should be done with packaging and labelling materials that don't conform to established specifications?",factual
+"Under ICH Q7, can APIs be released for distribution to third parties before the quality unit has released them?",factual
+"During process validation of an API manufacturing process, does ICH Q7 require every process parameter to be monitored, or only certain ones?",factual
+What is the purpose of the Pharmaceutical Development section (3.2.P.2) described in ICH Q8(R2)?,factual
+"According to ICH Q8, how can process performance be monitored after a design space has been established, to confirm it continues to deliver the predicted product quality?",factual
+"For sterile products, what container closure aspect does ICH Q8 say should be discussed under the drug product's microbiological attributes?",factual
+"What is a Quality Target Product Profile (QTPP), and what factors does ICH Q8 say it could include?",factual
+How does ICH Q8 define a Critical Quality Attribute (CQA)?,factual
+"According to ICH Q9(R1), what are common sources of subjectivity in a quality risk management process, and can subjectivity ever be fully eliminated?",factual
+"According to ICH Q9(R1), what does the risk assessment step of the quality risk management process consist of?",factual
+"What is the purpose of risk control in ICH Q9(R1)'s quality risk management process, and how should the level of effort involved be determined?",factual
+What does ICH Q9(R1) mean by 'risk communication' within the quality risk management process?,factual
+"According to ICH Q9(R1), what kinds of events should trigger a review of a previously made quality risk management decision?",factual
+"What does ICH Q10 mean by 'Facilitate Continual Improvement', one of its three main objectives?",factual
+What is the objective of 'Establish and Maintain a State of Control' under ICH Q10?,factual
+What sources of knowledge does ICH Q10 identify as inputs to knowledge management across a product's lifecycle?,factual
+What processes does ICH Q10 require a pharmaceutical company to have in place when outsourcing activities or purchasing materials from suppliers?,factual
+"Who is responsible for pharmaceutical quality system governance through management review, according to ICH Q10?",factual
+How does the FDA's requirement for endotoxin-challenge validation of container/closure depyrogenation (99.9%/3-log reduction) compare to EU GMP Annex 1's approach to validating sterilisation processes?,factual
+How does ICH Q7's definition of 'blending' as part of the production process compare to how EU GMP Annex 1 treats equipment and process validation for sterile manufacturing?,factual
+"How does the number of cleanroom grades defined in EU GMP Annex 1 (four grades, A-D) relate to the environmental classification approach described in FDA's aseptic processing guidance?",factual
+How does ICH Q9(R1)'s concept of managing subjectivity in risk assessments relate to ICH Q10's objective of establishing and maintaining a state of control?,factual
+How does FDA's definition of 'concurrent release' relate to EU GMP Annex 1's requirements for validating an aseptic process via APS before routine production?,factual
+How does ICH Q8's definition of a Critical Quality Attribute (CQA) relate to the quality unit responsibilities for reviewing batch records described in ICH Q7?,factual

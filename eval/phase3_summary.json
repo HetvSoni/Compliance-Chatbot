@@ -1,0 +1,42 @@
+{
+  "classification": {
+    "n_train": 118,
+    "n_test": 30,
+    "intent_macro_f1": 0.7261272141706924,
+    "framework_macro_f1": 0.8049019607843138,
+    "caveat": "small dataset (118 train examples) -- indicative baseline, not production-grade"
+  },
+  "retrieval": {
+    "n_questions": 148,
+    "mrr": 0.7322223068933595,
+    "recall_at_k": {
+      "5": 0.8783783783783784,
+      "10": 0.9324324324324325,
+      "20": 0.9459459459459459
+    },
+    "ndcg_at_k": {
+      "5": 0.7472410275526389,
+      "10": 0.7645125756621016,
+      "20": 0.7710929259271595
+    },
+    "caveat": "definition-intent questions are a documented weak spot (6 of 8 misses)"
+  },
+  "safety_classifier": {
+    "target_recall": 0.9,
+    "achieved_recall": 0.9,
+    "achieved_precision": 1.0,
+    "chosen_threshold": 0.493268915828997,
+    "default_threshold_recall_for_comparison": 0.8
+  },
+  "generation": {
+    "baseline_tier": "answer.py -- extractive, zero hallucination risk, brittle to phrasing",
+    "intermediate_tier": "generate_rag.py -- flan-t5-base + faithfulness check (catches invented content, not retrieval-irrelevant-but-real content)",
+    "rouge_l": null,
+    "bertscore": null,
+    "why_missing": "no reference answer text exists to score against -- gold_passages.csv has gold CITATIONS, not gold ANSWER TEXT. Would need that annotation pass first; not fabricated here."
+  },
+  "advanced_tier": {
+    "cross_framework_comparison": "compare_frameworks.py -- per-framework top match with relative-score coverage check (threshold=0.5, empirically calibrated, see module docstring)",
+    "reranker": "not built -- judged not worth the added complexity relative to Phase 4 integration work; documented as an open option, not silently dropped"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "n_train": 158,
+  "n_test": 40,
+  "target_recall": 0.9,
+  "chosen_threshold": 0.493268915828997,
+  "recall_at_threshold": 0.9,
+  "precision_at_threshold": 1.0,
+  "default_threshold_recall": 0.8
+}

@@ -1,0 +1,20 @@
+# --- Phase 1 (data collection + extraction) ---
+requests>=2.31
+beautifulsoup4>=4.12
+lxml>=5.0
+pdfplumber>=0.11
+pandas>=2.0
+python-dateutil>=2.9
+datasets>=2.19          # HuggingFace loader for EURLEX-57K + BillSum
+
+# --- listed now, used in later phases (kept here so the env is built once) ---
+transformers>=4.41
+rank-bm25>=0.2.2
+scikit-learn>=1.3      # TF-IDF+LogReg baseline classifier, train/test splitting
+
+# sentence-transformers / faiss-cpu intentionally NOT listed: dense retrieval
+# and FAISS were dropped from project scope (BM25-only), see project memory.
+
+# --- Phase 4 (chatbot integration + delivery) ---
+joblib>=1.3             # persisting the baseline/safety classifiers
+streamlit>=1.59          # chat UI
