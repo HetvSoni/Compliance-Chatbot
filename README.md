@@ -1,4 +1,4 @@
-# Team 14 — Regulatory Compliance Q&A Chatbot
+Regulatory Compliance Q&A Chatbot
 
 A RAG-based chatbot over FDA / EU / ICH / USP pharmaceutical regulatory text —
 21 CFR parts 210/211/600/601/606/610, FDA sterile-processing and process-
