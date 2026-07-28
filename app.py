@@ -34,11 +34,18 @@ with st.sidebar:
     st.header("Settings")
     generator = st.radio(
         "Answer generator",
-        options=["baseline", "rag"],
-        format_func=lambda g: "Baseline (extractive, zero hallucination risk)"
-        if g == "baseline" else "Intermediate (flan-t5-base RAG, faithfulness-checked)",
-        help="Baseline: exact regulatory text, no synthesis. RAG: paraphrased, "
-             "more natural, first query is slow (~1GB model download+load).",
+        options=["layered", "baseline", "rag"],
+        index=0,
+        format_func=lambda g: {
+            "layered": "Layered (recommended: framing + full-detail citations + plain-English)",
+            "baseline": "Baseline (single citation, extractive, zero hallucination risk)",
+            "rag": "Intermediate (flan-t5-base RAG only, faithfulness-checked)",
+        }[g],
+        help="Layered: best for most users -- combines a plain framing sentence, the "
+             "precise regulatory text synthesized across ALL retrieved citations (not "
+             "just one), and an optional AI-simplified explanation. Baseline: narrower, "
+             "single-citation extract. RAG: pure model synthesis, no verbatim layer. "
+             "First query using layered/rag is slow (~1GB model download+load).",
     )
     top_k = st.slider("Chunks to retrieve", min_value=1, max_value=8, value=3)
     st.divider()
@@ -78,10 +85,22 @@ if query:
         if result["disclaimer"]:
             parts.append(f"\n> ⚠️ {result['disclaimer']} (confidence: {result['safety_confidence']:.2f})\n")
 
+        if result.get("framing"):
+            parts.append(f"\n*{result['framing']}*")
+
         parts.append(f"\n**Answer:** {result['answer']}")
 
         if result.get("faithfulness_score") is not None:
             parts.append(f"\n*(faithfulness score: {result['faithfulness_score']:.2f})*")
+
+        if result.get("simplified"):
+            parts.append(
+                f"\n\n**In plain English** (AI-simplified, faithfulness="
+                f"{result['simplified_faithfulness']:.2f}): {result['simplified']}"
+            )
+        elif "simplified" in result and result["simplified"] is None:
+            parts.append("\n\n*(Plain-English simplification withheld -- it didn't "
+                          "check out against the verbatim answer above.)*")
 
         if result["citations"]:
             parts.append("\n\n**Citations:**")

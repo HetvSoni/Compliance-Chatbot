@@ -70,25 +70,49 @@ def _sentences(chunk_text):
     return [s.strip() for s in SENTENCE_SPLIT.split(chunk_text) if s.strip()]
 
 
-def extract_best_span(chunk_text, query, context_window=1):
-    """Within one chunk, find its best-matching sentence via a chunk-local
-    BM25 index, and return it plus its immediate neighbors for readability."""
+def _local_best_span(chunk_text, query, context_window=1):
+    """Returns (span_text, matched). matched=False means no sentence in
+    this chunk shares real terminology with the query -- span_text is then
+    just the chunk's opening, not a real answer."""
     sentences = _sentences(chunk_text)
     if len(sentences) <= 1:
-        return _clean(chunk_text)[:600]
+        return _clean(chunk_text)[:600], True
 
     local_bm25 = BM25Okapi([_tokenize(s) for s in sentences])
     scores = local_bm25.get_scores(_tokenize(query))
     best_idx = max(range(len(scores)), key=lambda i: scores[i])
 
     if scores[best_idx] <= 0:
-        # no sentence shares real terminology with the query -- be honest
-        # about it rather than presenting an arbitrary sentence as "the answer"
-        return "[no sentence within this section closely matches the query] " + _clean(
-            " ".join(sentences[:2]))
+        return _clean(" ".join(sentences[:2])), False
 
     lo, hi = max(0, best_idx - context_window), best_idx + context_window + 1
-    return _clean(" ".join(sentences[lo:hi]))
+    return _clean(" ".join(sentences[lo:hi])), True
+
+
+def extract_best_span(chunk_text, query, context_window=1):
+    """Within one chunk, find its best-matching sentence via a chunk-local
+    BM25 index, and return it plus its immediate neighbors for readability."""
+    span, matched = _local_best_span(chunk_text, query, context_window)
+    if not matched:
+        # no sentence shares real terminology with the query -- be honest
+        # about it rather than presenting an arbitrary sentence as "the answer"
+        return "[no sentence within this section closely matches the query] " + span
+    return span
+
+
+def extract_multi_span(hits, query, context_window=1):
+    """Best-matching span from EVERY hit, not just the top one -- feeds the
+    'layered' detailed answer format that synthesizes across all retrieved
+    citations instead of picking a single chunk and discarding the rest."""
+    results = []
+    for c in hits:
+        span, matched = _local_best_span(c["text"], query, context_window)
+        results.append({
+            "chunk_id": c["chunk_id"], "framework": c["framework"],
+            "title": c["title"], "section": c["section"],
+            "source_url": c["source_url"], "span": span, "matched": matched,
+        })
+    return results
 
 
 def answer(query, top_k=3):

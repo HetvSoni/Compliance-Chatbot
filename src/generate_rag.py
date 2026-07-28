@@ -93,6 +93,40 @@ def faithfulness_score(answer_text, context_text):
     return len(answer_words & context_words) / len(answer_words)
 
 
+SIMPLIFY_THRESHOLD = 0.35  # looser than the main faithfulness check (0.45): a
+                           # good paraphrase is SUPPOSED to use different words
+                           # than the source -- this only guards against the
+                           # model adding facts that weren't in the verbatim text
+
+SIMPLIFY_PROMPT = """Explain the following regulatory text in plain, simple English
+for someone new to the pharmaceutical industry. Keep it to 2-3 short sentences.
+Do not add any facts that are not in the text below.
+
+Regulatory text:
+{verbatim}
+
+Question asked: {question}
+Simple explanation:"""
+
+
+def simplify(verbatim_text, question, max_new_tokens=100):
+    """Generate a beginner-friendly paraphrase of an ALREADY-VERIFIED verbatim
+    answer (not the raw retrieved context) -- faithfulness is checked against
+    that verbatim text, so the check only asks "did the model invent a new
+    claim", not "did it use different words" (paraphrasing is the whole
+    point). Returns (simplified_text_or_None, faithfulness_score)."""
+    tokenizer, model = load_generator()
+    prompt = SIMPLIFY_PROMPT.format(verbatim=verbatim_text[:1500], question=question)
+    inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=MAX_INPUT_TOKENS)
+    output_ids = model.generate(**inputs, max_new_tokens=max_new_tokens, num_beams=4)
+    generated = tokenizer.decode(output_ids[0], skip_special_tokens=True).strip()
+
+    score = faithfulness_score(generated, verbatim_text)
+    if score < SIMPLIFY_THRESHOLD:
+        return None, score
+    return generated, score
+
+
 def generate(query, top_k=4, max_new_tokens=150, hits=None):
     """hits: optionally pass already-retrieved chunks (e.g. from the
     pipeline's framework-scoped retrieval) instead of doing a fresh
