@@ -47,10 +47,25 @@ def ranked_chunk_ids(bm25, chunks, query, top_k):
     return [chunks[i]["chunk_id"] for i in ranked]
 
 
-def evaluate(k_values):
+def reranked_chunk_ids(bm25, chunks, query, pool_size, rerank_fn):
+    """Same BM25 candidate POOL as ranked_chunk_ids, just reordered by the
+    cross-encoder -- isolates the ordering improvement (MRR, Recall@low-k)
+    from any recall change, since it's the identical pool either way."""
+    scores = bm25.get_scores(_tokenize(query))
+    top_idx = sorted(range(len(chunks)), key=lambda i: scores[i], reverse=True)[:pool_size]
+    candidates = [chunks[i] for i in top_idx]
+    reranked = rerank_fn(query, candidates, top_k=len(candidates))
+    return [c["chunk_id"] for c in reranked]
+
+
+def evaluate(k_values, use_reranker=False):
     bm25, chunks = load_index()
     gold = pd.read_csv(GOLD_PATH, dtype=str, keep_default_na=False)
     max_k = max(k_values)
+
+    rerank_fn = None
+    if use_reranker:
+        from src.rerank import rerank as rerank_fn
 
     recall_hits = {k: 0 for k in k_values}
     reciprocal_ranks = []
@@ -62,7 +77,10 @@ def evaluate(k_values):
         if not gold_ids:
             continue  # out-of-corpus rows have no gold_chunk_ids to evaluate against
 
-        top_ids = ranked_chunk_ids(bm25, chunks, row["question"], max_k)
+        if use_reranker:
+            top_ids = reranked_chunk_ids(bm25, chunks, row["question"], max_k, rerank_fn)
+        else:
+            top_ids = ranked_chunk_ids(bm25, chunks, row["question"], max_k)
 
         rr = 0.0
         for rank, cid in enumerate(top_ids, start=1):
@@ -95,15 +113,18 @@ def evaluate(k_values):
 def main():
     ap = argparse.ArgumentParser(description="Phase 3 retrieval evaluation")
     ap.add_argument("--k", nargs="+", type=int, default=[5, 10, 20])
+    ap.add_argument("--rerank", action="store_true",
+                     help="rerank the BM25 candidate pool with the cross-encoder before scoring")
     args = ap.parse_args()
 
-    metrics = evaluate(k_values=tuple(sorted(args.k)))
+    metrics = evaluate(k_values=tuple(sorted(args.k)), use_reranker=args.rerank)
     print(json.dumps(metrics, indent=2))
 
-    OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    with open(OUT_PATH, "w", encoding="utf-8") as fh:
+    out_path = ROOT / "eval" / ("retrieval_metrics_reranked.json" if args.rerank else "retrieval_metrics.json")
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(out_path, "w", encoding="utf-8") as fh:
         json.dump(metrics, fh, indent=2)
-    print(f"\nsaved -> {OUT_PATH}")
+    print(f"\nsaved -> {out_path}")
 
 
 if __name__ == "__main__":

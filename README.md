@@ -36,7 +36,9 @@ pharma-chatbot/
 │   ├── train_safety_classifier.py, safety.py ← Phase 3: advice-seeking flagger
 │   ├── compare_frameworks.py                  ← Phase 3 advanced tier: cross-framework comparison
 │   ├── summarize_metrics.py                   ← Phase 3: consolidated metrics report
-│   └── pipeline.py                            ← Phase 4: wires everything together
+│   ├── rerank.py                              ← Phase 4: cross-encoder reranker (off by default, see below)
+│   ├── polish.py                              ← Phase 4: single-answer paraphrase (flan-t5-large)
+│   └── pipeline.py                            ← Phase 4: wires everything together (default generator: "polished")
 ├── data/{raw,text,processed}/     raw = originals · text = extractions · processed = chunks.jsonl
 ├── data/eval/                      questions_draft.csv → gold_passages.csv (reviewed) → splits
 ├── models/{baseline_classifier,bm25,safety_classifier}/
@@ -77,12 +79,17 @@ python -m src.train_safety_classifier # advice-seeking flagger, recall-tuned
 python -m src.summarize_metrics       # consolidates everything above into one report
 
 # Phase 4 — run the integrated chatbot
-streamlit run app.py                  # interactive UI
+streamlit run app.py                  # interactive UI (default generator: polished)
 # or, from the CLI directly:
-python -m src.pipeline --query "What is a Contamination Control Strategy?" --generator baseline
-python -m src.pipeline --query "..." --generator rag
+python -m src.pipeline --query "What is a Contamination Control Strategy?"                 # polished (default)
+python -m src.pipeline --query "..." --generator baseline                                  # raw single-citation extract
+python -m src.pipeline --query "..." --generator rag                                       # Phase 3 flan-t5-base tier
+python -m src.pipeline --query "..." --use-reranker                                        # opt-in cross-encoder (see caveat below)
 python -m src.compare_frameworks --query "How many APS runs validate an aseptic process?"
 python -m src.run_human_eval          # generates eval/human_eval.csv for manual scoring
+
+# Optional: quantify the reranker's effect on retrieval quality
+python -m src.eval_retrieval --rerank # writes eval/retrieval_metrics_reranked.json
 ```
 
 ## Current results (see `eval/phase3_summary.json` for the machine-readable version)
@@ -92,9 +99,12 @@ python -m src.run_human_eval          # generates eval/human_eval.csv for manual
 | Intent classifier (TF-IDF + LogReg) | macro-F1 0.726 (118 train examples) |
 | Framework classifier (TF-IDF + LogReg) | macro-F1 0.805 |
 | Retrieval (BM25, 148-question gold set) | Recall@5 87.8%, Recall@10 93.2%, MRR 0.732 |
+| Retrieval + cross-encoder reranker | MRR 0.749 (▲) but Recall@5 83.8%, Recall@10 89.2% (▼ both) — mixed, **off by default** |
+| Relevance filter (`pipeline.filter_relevant`) | Drops chunks below 50% of the query's own top BM25 score instead of forcing a fixed count |
 | Safety classifier (advice-seeking flagger) | Recall 0.900 (target met), precision 1.00 |
-| Baseline generator | Extractive, zero hallucination risk |
-| Intermediate generator (flan-t5-base) | Faithfulness-checked RAG synthesis |
+| Baseline generator | Single-citation extract, zero hallucination risk |
+| Intermediate generator (flan-t5-base, Phase 3 "rag" tier) | Faithfulness-checked RAG synthesis |
+| **Polished generator (default, flan-t5-large)** | Relevance-filtered multi-citation synthesis rewritten as one answer, faithfulness-checked against its own verbatim source |
 
 **Read `docs/ERROR_ANALYSIS.md` before trusting any of the above at face
 value** — it documents exactly where and why each component fails,
@@ -102,13 +112,21 @@ reproduced with concrete examples, not just the passing-case numbers.
 
 ## Known limitations (see `docs/ERROR_ANALYSIS.md` for full detail)
 
-- No dense retrieval/reranker — BM25-only was a deliberate scope decision.
+- No dense retrieval/FAISS — BM25 (+ optional reranker) was a deliberate scope decision.
+- The cross-encoder reranker is a genuine mixed bag, not a clean win — MRR
+  improves but Recall@5/10 gets worse, likely a domain mismatch (trained on
+  general web search, not regulatory/legal text). Off by default; opt in with
+  `--use-reranker` / the UI checkbox if you want to compare it yourself.
 - Definition-style questions are retrieval's weakest spot (vocabulary
   mismatch between how questions are phrased and how source text defines terms).
-- The RAG generator's faithfulness check catches invented content, but not
-  a confident summary of the *wrong* (but real) retrieved chunk — that's a
-  retrieval-precision gap, not a generation-faithfulness one.
+- The relevance filter and faithfulness checks catch invented content and
+  padding-in of low-relevance chunks, but not a confident summary of a
+  *wrong-but-real* retrieved chunk if BM25's whole candidate pool missed —
+  that's a retrieval-recall gap, not something a downstream filter/check can fix.
 - No ROUGE-L/BERTScore — those need reference answer text, which was never
   authored (the gold set has citations, not gold answer prose).
 - Small training sets throughout (118 classifier examples, 50 safety
   examples) — indicative baselines, not production-scale.
+- The "polished" generator's flan-t5-large download (~3GB) is a one-time
+  cost on first use; chosen over a hosted GPT API deliberately, to keep this
+  a locally-run, no-cost, no-API-key part of the project's own pipeline.
