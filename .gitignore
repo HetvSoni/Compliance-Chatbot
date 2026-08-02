@@ -4,11 +4,13 @@ __pycache__/
 venv/
 .venv/
 
-# Large / regeneratable data artifacts (re-run the Phase 1-2 pipeline to rebuild)
+# Large Phase 1 raw/extracted documents (re-run download_sources.py + extract_text.py
+# to rebuild -- these are the bulky originals, not needed just to run the chatbot).
+# data/processed/ and models/bm25/ are DELIBERATELY NOT excluded below: they're only
+# ~40MB total and committing them means anyone who clones the repo can run the app
+# immediately, without redoing the whole Phase 1 pipeline first.
 data/raw/
 data/text/
-data/processed/
-models/bm25/
 state/
 
 # HuggingFace cache (if it ever lands inside the repo instead of ~/.cache)
